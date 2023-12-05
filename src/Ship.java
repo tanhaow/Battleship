@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -8,9 +7,9 @@ import java.util.Random;
  *********************************************************************************************/
 
 public abstract class Ship {
-    private ArrayList<ShipBlock> blocks;
-    private boolean horizontal;
-    private int length;
+    private final ArrayList<ShipBlock> blocks;
+    private final boolean horizontal;
+    private final int length;
 
     public Ship(int length, boolean horizontal) {
         this.length = length;
@@ -68,8 +67,8 @@ public abstract class Ship {
 
     // Inner class ShipBlock
     public static class ShipBlock {
-        private int row;
-        private int column;
+        private final int row;
+        private final int column;
         private boolean hit;
 
         public ShipBlock(int row, int column) {

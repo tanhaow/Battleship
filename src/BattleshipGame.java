@@ -32,7 +32,7 @@ public class BattleshipGame {
     /**
      *  setupGame(): Set up the game board and ships.
      * */
-    private void setupGame() {
+    void setupGame() {
         gameOcean = new Ocean();
         gameOcean.placeAllShipsRandomly();
         scanner = new Scanner(System.in);
@@ -63,8 +63,8 @@ public class BattleshipGame {
      * printFinalScores(): Print the final scores after the game ends.
      * */
     private void printFinalScores() {
-        System.out.println("Game Over!");
-        System.out.println("Final Scores:");
+        System.out.println("------- Game Over -------");
+        System.out.println("--- YOUR FINAL SCORES ---");
         System.out.println("Shots Fired: " + gameOcean.getShotsFired());
         System.out.println("Hit Count: " + gameOcean.getHitCount());
         System.out.println("Ships Sunk: " + gameOcean.getShipsSunk());

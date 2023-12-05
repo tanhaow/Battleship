@@ -6,7 +6,7 @@ import java.util.Random;
 public class Ocean implements OceanInterface {
 
 	/** A 10x10 2D array of Ships, which can be used to quickly determine which ship is in any given location.*/
-	int OCEAN_SIZE = 10;
+	static int OCEAN_SIZE = 10;
 	protected Ship[][] ships;
 
 	/** The total number of shots fired by the user */
@@ -111,7 +111,7 @@ public class Ocean implements OceanInterface {
 	 *         {@literal false} if the given location does not contain a ship ("EmptySea")
 	 */
 	public boolean isOccupied(int row, int column) {
-		return (!ships[row][column].getShipType().equals("EmptySea"));
+		return (!(ships[row][column] instanceof EmptySea));
 	}
 
 
@@ -163,7 +163,8 @@ public class Ocean implements OceanInterface {
 	public boolean isGameOver() {
 		for (int row = 0; row < OCEAN_SIZE; ++row) {
 			for (int col = 0; col < OCEAN_SIZE; ++col) {
-				if (isOccupied(row, col)) return false;
+				// if it is a real ship and not sunk, the game is not over
+				if (isOccupied(row, col) && !ships[row][col].isSunk()) return false;
 			}
 		}
 		return true;
