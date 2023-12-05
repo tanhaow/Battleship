@@ -1,7 +1,8 @@
 # Battleship Game
+Github repo link: https://github.com/tanhaow/Battleship.git
 
 ## Overview
-Battleship is a classic naval strategy game. This implementation is a text-based version that allows a player to play against the computer in a console application. The game, implemented in Java, features a 10x10 grid where players aim to sink their opponent's fleet of ships.
+Battleship is a classic strategy game. This implementation is a text-based version that allows a player to play against the computer in a console application. The game, implemented in Java, features a 10x10 grid where players aim to sink their opponent's fleet of ships.
 
 ## Features
 - Text-based user interface for gameplay in any Java-enabled console.
@@ -39,5 +40,5 @@ The game is played on a 10x10 grid. Players take turns firing shots at their opp
 2. **Build the Project**: Use the 'Build' option in the menu or the build icon to build the project.
 3. **Run the Game**: Right-click on `BattleshipGame.java` in the project explorer and select 'Run BattleshipGame.main()'.
 
-## Contributing
-Contributions to the Battleship game project are welcome. Feel free to fork the repository, make changes, and open a pull request with your improvements.
+## Contact
+- Hao Tan: [tanhao@seas.upenn.edu](mailto:tanhao@seas.upenn.edu)
