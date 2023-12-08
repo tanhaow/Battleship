@@ -1,76 +1,139 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ShipTest {
-    private Ocean gameOcean;
+    private Ocean testOcean;
 
     @BeforeEach
     public void setup() {
-        gameOcean = new Ocean();
+        testOcean = new Ocean();
     }
 
-    /******************* Test Ship Class ********************/
-//    @Test
-//    public void testSetPosition() {
-//        // initialize and set the position of the test ship
-//        Ship ship = new Cruiser();  // length = 3
-//        ship.setPosition(0, 0);
-//
-//        // the cruiser can be placed either horizontally or vertically
-//        // if horizontal:
-//        if (gameOcean.isOccupied(0, 1)){
-//            assertTrue(gameOcean.isOccupied(0, 2));
-//        }
-//        if (gameOcean.isOccupied(1, 0)){
-//            assertTrue(gameOcean.isOccupied(2, 0));
-//        }
-//    }
+
+    @Test
+    public void testOkToPlaceShipAt0() {
+        // create a Battleship and place it at (0, 0)
+        Ship ship = new Battleship();
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        // creat another Battleship and try place it at the same location
+        Ship ship2 = new Battleship();
+        boolean okToPlace = ship2.okToPlaceShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        // should be false
+        assertFalse(okToPlace);
+    }
+
+    @Test
+    public void testOkToPlaceShipAt1() {
+        // create a submarine and place it at (0, 0)
+        Ship ship = new Submarine();
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        // creat another submarine and try place it next to the first submarine
+        Ship ship2 = new Submarine();
+        boolean okToPlace = ship2.okToPlaceShipAt(0, 1, ship.isHorizontal(), this.testOcean);
+        // should be false
+        assertFalse(okToPlace);
+    }
+
+    @Test
+    public void testOkToPlaceShipAt2() {
+        // create a submarine and place it at (0, 0)
+        Ship ship = new Submarine();
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        // creat another submarine and try place it at the diagonal corner of the first submarine
+        Ship ship2 = new Submarine();
+        boolean okToPlace = ship2.okToPlaceShipAt(1, 1, ship.isHorizontal(), this.testOcean);
+        // should be false
+        assertFalse(okToPlace);
+    }
+
+    @Test
+    public void testPlaceShipAt0() {
+        // create a Battleship and place it at (0, 0)
+        Ship ship = new Battleship();
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        for (int i = 0; i < ship.length; ++i) {
+            int targetRow = ship.isHorizontal() ? 0 : i;
+            int targetCol = ship.isHorizontal() ? i : 0;
+            assertTrue(testOcean.isOccupied(targetRow, targetCol));
+        }
+    }
+
+    @Test
+    public void testPlaceShipAt1() {
+        // create a Battleship and place it at (5, 5)
+        Ship ship = new Battleship();
+        ship.placeShipAt(5, 5, ship.isHorizontal(), this.testOcean);
+        for (int i = 0; i < ship.length; ++i) {
+            int targetRow = ship.isHorizontal() ? 5 : 5 + i;
+            int targetCol = ship.isHorizontal() ? 5 + i : 5;
+            assertTrue(testOcean.isOccupied(targetRow, targetCol));
+        }
+    }
 
 
-//    @Test
-//    public void testIsHit() {
-//        // initialize and set the position of the test ship
-//        Ship ship = new Battleship();
-//        ship.setPosition(0, 0);
-//
-//        // Test hit on the ship
-//        ship.setHit(0, 0);
-//        assertTrue(ship.isHit(0, 0));
-//
-//        // Test hit on a non-existing part
-//        assertFalse(ship.isHit(5, 5));
-//    }
+    @Test
+    public void testShootAt0() {
+        Ship ship = new Submarine();
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        ship.shootAt(0 ,0);
+        assertTrue(ship.isSunk());
+    }
+
+    @Test
+    public void testShootAt1() {
+        Ship ship = new Cruiser();
+        ship.setHorizontal(true);
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        ship.shootAt(0 ,0);
+        ship.shootAt(0 ,2);
+        boolean[] expected_hit = new boolean[]{true, false, true};
+        assertArrayEquals(expected_hit, ship.getHit());
+    }
 
 
-//    @Test
-//    public void testSetHit() {
-//        // initialize and set the position of the test ship
-//        Ship ship = new Submarine();
-//        ship.setPosition(0, 0);
-//
-//        // Test hit on the ship
-//        ship.setHit(0, 0);
-//        assertTrue(ship.isHit(0, 0));
-//
-//        // Test hit on a non-existing part
-//        assertFalse(ship.isHit(1, 1));
-//    }
+    @Test
+    public void testIsSunk0() {
+        Ship ship = new Destroyer();
+        ship.setHorizontal(true);
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        ship.shootAt(0 ,0);
+        ship.shootAt(0 ,1);
+        assertTrue(ship.isSunk());
+    }
 
-//    @Test
-//    public void testIsSunk() {
-//        Ship ship = new Destroyer(); // length = 2
-//        ship.setPosition(0, 0);
-//
-//        // the destroyer can be placed either horizontally or vertically
-//        // so hit evey possible block
-//        ship.setHit(0, 0);
-//        ship.setHit(0, 1);
-//        ship.setHit(1, 0);
-//
-//        assertTrue(ship.isSunk());
-//    }
+    @Test
+    public void testIsSunk1() {
+        Ship ship = new Destroyer();
+        ship.setHorizontal(false);
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        ship.shootAt(1 ,0);
+        assertFalse(ship.isSunk());
+    }
+
+
+    @Test
+    public void testToString0() {
+        Ship ship = new Submarine();
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        ship.shootAt(0, 0);
+        assertEquals("x", ship.toString());
+    }
+
+    @Test
+    public void testToString1() {
+        Ship ship = new Battleship();
+        ship.placeShipAt(0, 0, ship.isHorizontal(), this.testOcean);
+        ship.shootAt(0, 0);
+        assertEquals("S", ship.toString());
+    }
+
+
     @Test
     public void testGetShipType0() {
         Ship ship = new Battleship();
@@ -95,12 +158,3 @@ public class ShipTest {
         assertEquals(ship.getShipType(), "Submarine");
     }
 }
-
-//    @Test
-//    public void testGetBlocks() {
-//        Ship ship = new Battleship();
-//        ArrayList<Ship.ShipBlock> expected_blocks = new ArrayList<>(4); // length = 4
-//        ArrayList<Ship.ShipBlock> actual_blocks = (ArrayList<Ship.ShipBlock>) ship.getBlocks();
-//        assertEquals(expected_blocks, actual_blocks);
-//    }
-//}

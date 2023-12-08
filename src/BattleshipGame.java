@@ -31,7 +31,6 @@ public class BattleshipGame {
      * Set up the game board and ships.
      */
     public BattleshipGame() {
-        scanner = new Scanner(System.in);
         gameOcean = new Ocean();
         gameOcean.placeAllShipsRandomly();
         scanner = new Scanner(System.in);

@@ -111,11 +111,8 @@ public abstract class Ship {
 
     // If a part of this ship occupies the given coordinates, mark it as "hit"
     public boolean shootAt(int row, int column) {
-
         // Check if it is already sunk
-        if (isSunk()) {
-            return false;
-        }
+        if (isSunk()) return false;
 
         // Check if the ship is an EmptySea
         if (this instanceof EmptySea) {
@@ -133,6 +130,8 @@ public abstract class Ship {
         }
         return false;
     }
+
+
 
     // Returns true if every part of the ship has been hit, false otherwise
     public boolean isSunk() {

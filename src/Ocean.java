@@ -75,13 +75,8 @@ public class Ocean implements OceanInterface {
 	 * @return {@literal true} if all ships have been sunk, otherwise
 	 *         {@literal false}. */
 	public boolean isGameOver() {
-		for (int row = 0; row < OCEAN_SIZE; ++row) {
-			for (int col = 0; col < OCEAN_SIZE; ++col) {
-				// if it is a real ship and not sunk, the game is not over
-				if (isOccupied(row, col) && !ships[row][col].isSunk()) return false;
-			}
-		}
-		return true;
+		if (getShipsSunk() == 10) return true;
+		return false;
 	}
 
 
