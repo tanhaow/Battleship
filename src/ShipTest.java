@@ -1,21 +1,19 @@
-//import static org.junit.Assert.*;
-//import org.junit.Test;
-//import org.junit.jupiter.api.BeforeEach;
-//import java.util.ArrayList;
-//
-//
-//public class ShipTest {
-//    private Ocean gameOcean;
-//
-//    @BeforeEach
-//    public void setup() {
-//        gameOcean = new Ocean();
-//    }
-//
-//    /******************* Test Ship Class ********************/
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+
+public class ShipTest {
+    private Ocean gameOcean;
+
+    @BeforeEach
+    public void setup() {
+        gameOcean = new Ocean();
+    }
+
+    /******************* Test Ship Class ********************/
 //    @Test
 //    public void testSetPosition() {
-//        gameOcean = new Ocean();
 //        // initialize and set the position of the test ship
 //        Ship ship = new Cruiser();  // length = 3
 //        ship.setPosition(0, 0);
@@ -29,8 +27,8 @@
 //            assertTrue(gameOcean.isOccupied(2, 0));
 //        }
 //    }
-//
-//
+
+
 //    @Test
 //    public void testIsHit() {
 //        // initialize and set the position of the test ship
@@ -44,8 +42,8 @@
 //        // Test hit on a non-existing part
 //        assertFalse(ship.isHit(5, 5));
 //    }
-//
-//
+
+
 //    @Test
 //    public void testSetHit() {
 //        // initialize and set the position of the test ship
@@ -59,7 +57,7 @@
 //        // Test hit on a non-existing part
 //        assertFalse(ship.isHit(1, 1));
 //    }
-//
+
 //    @Test
 //    public void testIsSunk() {
 //        Ship ship = new Destroyer(); // length = 2
@@ -73,28 +71,31 @@
 //
 //        assertTrue(ship.isSunk());
 //    }
-//
-//    @Test
-//    public void testGetShipType0() {
-//        Ship ship = new Battleship();
-//        assertEquals(ship.getShipType(), "Battleship");
-//    }
-//    @Test
-//    public void testGetShipType1() {
-//        Ship ship = new Cruiser();
-//        assertEquals(ship.getShipType(), "Cruiser");
-//    }
-//    @Test
-//    public void testGetShipType2() {
-//        Ship ship = new Destroyer();
-//        assertEquals(ship.getShipType(), "Destroyer");
-//    }
-//    @Test
-//    public void testGetShipType3() {
-//        Ship ship = new Submarine();
-//        assertEquals(ship.getShipType(), "Submarine");
-//    }
-//
+    @Test
+    public void testGetShipType0() {
+        Ship ship = new Battleship();
+        assertEquals(ship.getShipType(), "Battleship");
+    }
+
+    @Test
+    public void testGetShipType1() {
+        Ship ship = new Cruiser();
+        assertEquals(ship.getShipType(), "Cruiser");
+    }
+
+    @Test
+    public void testGetShipType2() {
+        Ship ship = new Destroyer();
+        assertEquals(ship.getShipType(), "Destroyer");
+    }
+
+    @Test
+    public void testGetShipType3() {
+        Ship ship = new Submarine();
+        assertEquals(ship.getShipType(), "Submarine");
+    }
+}
+
 //    @Test
 //    public void testGetBlocks() {
 //        Ship ship = new Battleship();

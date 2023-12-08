@@ -3,40 +3,40 @@ import java.util.Scanner;
 /* The Main Method */
 public class BattleshipGame {
 
-    private Ocean gameOcean;
+    private final Ocean gameOcean;
     private Scanner scanner;
 
     public static void main(String[] args) throws InterruptedException {
 
         BattleshipGame game = new BattleshipGame();
-        game.setupGame();
 
         // Introduce a delay for game to set up
         Thread.sleep(1000); // Wait for 1 second
 
         // Run a loop for the game process (accepting shots, displaying results, etc.).
-        while (!game.gameOcean.isGameOver()) {
+        while (!game.isGameOver()) {
             game.displayGameBoard();
             game.acceptUserShot();
             game.displayResults();
         }
         game.printFinalScores();
 
-        // Ask the player if they want to replay after the game ends.
-        if (game.askForReplay()) {
+        if (game.askForReplay()) { // Ask the player if they want to replay after the game ends
             main(args); // Restart the game
         }
     }
 
-
     /**
-     *  setupGame(): Set up the game board and ships.
-     * */
-    void setupGame() {
+     * Constructor for BattleshipGame().
+     * Set up the game board and ships.
+     */
+    public BattleshipGame() {
+        scanner = new Scanner(System.in);
         gameOcean = new Ocean();
         gameOcean.placeAllShipsRandomly();
         scanner = new Scanner(System.in);
     }
+
 
     /**
      * acceptUserShot(): Accept coordinates from the user for their shot.
@@ -65,6 +65,13 @@ public class BattleshipGame {
         System.out.println("Shots Fired: " + gameOcean.getShotsFired());
         System.out.println("Hit Count: " + gameOcean.getHitCount());
         System.out.println("Ships Sunk: " + gameOcean.getShipsSunk());
+    }
+
+    /**
+     * isGameOver(): check if the game is over.
+     */
+    private boolean isGameOver() {
+        return gameOcean.isGameOver();
     }
 
 

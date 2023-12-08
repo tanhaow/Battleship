@@ -2,11 +2,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 
-/*********************************************************************************************
-                                Ship (Super)
- *********************************************************************************************/
-
-
 /**
  * Ship is the abstract class for all of the ships and sea tiles that will make up the game of Battleship.
  * Ships of all kinds are always considered to be facing up or to the left, meaning that any portion of the
@@ -93,7 +88,7 @@ public abstract class Ship {
             }
         }
         return true;
-    };
+    }
 
 
     // Places the ship at the specified location
@@ -118,7 +113,9 @@ public abstract class Ship {
     public boolean shootAt(int row, int column) {
 
         // Check if it is already sunk
-        if (isSunk()) return false;
+        if (isSunk()) {
+            return false;
+        }
 
         // Check if the ship is an EmptySea
         if (this instanceof EmptySea) {
@@ -129,7 +126,7 @@ public abstract class Ship {
         // calculate the relative position of the shot: to identify which specific part of the ship got hit
         int delta = horizontal ? column - this.bowColumn : row - this.bowRow;
 
-        // If the shot is on the ship and the ship is not sunk, mark it as hit and return true
+        // If the shot is on the ship , mark it as hit and return true
         if (delta >= 0 && delta < this.length) {
             this.hit[delta] = true;
             return true;
@@ -143,7 +140,7 @@ public abstract class Ship {
             if (!partHit) return false; // if still exist non-hit part, means the ship is not sunk
         }
         return true;
-    };
+    }
 
     // Returns a single character String to use in the Ocean's print method
     public String toString() {
@@ -230,9 +227,9 @@ class EmptySea extends Ship {
         return "EmptySea";
     }
 
-    @Override
-    public boolean isSunk() {
-        return false; // EmptySea is never sunk
-    }
+//    @Override
+//    public boolean isSunk() {
+//        return false; // EmptySea is never sunk
+//    }
 }
 
