@@ -42,11 +42,21 @@ public class BattleshipGame {
      * acceptUserShot(): Accept coordinates from the user for their shot.
      * */
     private void acceptUserShot() {
-        System.out.println("Enter row and column to shoot (e.g., 3 5): ");
-        int row = scanner.nextInt();
-        int column = scanner.nextInt();
+        int row, column;
+        while (true) {
+            System.out.println("Enter row and column to shoot (e.g., 3 5): ");
+            row = scanner.nextInt();
+            column = scanner.nextInt();
+
+            if (row >= 0 && row < 10 && column >= 0 && column < 10) {
+                break; // Valid input, break out of the loop
+            } else {
+                System.out.println("The input row and column are not valid.");
+            }
+        }
         gameOcean.shootAt(row, column);
     }
+
 
     /**
      * displayResults(): Display the result of the shot (hit/miss).
@@ -64,10 +74,7 @@ public class BattleshipGame {
      * */
     private void printFinalScores() {
         System.out.println("------- Game Over -------");
-        System.out.println("--- YOUR FINAL SCORES ---");
-        System.out.println("Shots Fired: " + gameOcean.getShotsFired());
-        System.out.println("Hit Count: " + gameOcean.getHitCount());
-        System.out.println("Ships Sunk: " + gameOcean.getShipsSunk());
+        System.out.println("YOUR FINAL SCORES IS: " + gameOcean.getFinalScore());
     }
 
 

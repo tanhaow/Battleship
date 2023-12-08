@@ -31,8 +31,8 @@ public class OceanTest {
         // initialize a new ocean
         ocean = new Ocean();
         // when no ships are places, all blocks are empty sea
-        for (int row = 0; row < Ocean.OCEAN_SIZE; ++row) {
-            for (int col = 0; col < Ocean.OCEAN_SIZE; ++ col) {
+        for (int row = 0; row < 10; ++row) {
+            for (int col = 0; col < 10; ++ col) {
                 assertFalse(ocean.isOccupied(row, col));
             }
         }

@@ -28,7 +28,7 @@ The game is played on a 10x10 grid. Players take turns firing shots at their opp
 2. **Compilation**: Navigate to your project's root directory and compile all Java files.
    ```bash
    cd path/to/Battleship
-   javac BattleshipGame.java Ship.java Ocean.java OceanInterface.java
+   javac BattleshipGame.java Ship_old.java Ocean.java OceanInterface.java
    ```
 3. **Running the Game**: Run `BattleshipGame.java` using the Java command.
    ```bash
